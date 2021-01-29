@@ -2555,6 +2555,7 @@ ZEND_FUNCTION(fstat);
 ZEND_FUNCTION(fseek);
 ZEND_FUNCTION(ftell);
 ZEND_FUNCTION(fflush);
+ZEND_FUNCTION(fsync);
 ZEND_FUNCTION(fwrite);
 ZEND_FUNCTION(mkdir);
 ZEND_FUNCTION(rename);
@@ -3191,6 +3192,7 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_FE(fseek, arginfo_fseek)
 	ZEND_FE(ftell, arginfo_ftell)
 	ZEND_FE(fflush, arginfo_fflush)
+	ZEND_FE(fsync, arginfo_fflush)
 	ZEND_FE(fwrite, arginfo_fwrite)
 	ZEND_FALIAS(fputs, fwrite, arginfo_fputs)
 	ZEND_FE(mkdir, arginfo_mkdir)
