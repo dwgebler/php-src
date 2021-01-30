@@ -520,6 +520,23 @@ static int php_stdiop_close(php_stream *stream, int close_handle)
 	return ret;
 }
 
+//dwg
+static int php_stdiop_sync(php_stream *stream)
+{
+	php_stdio_stream_data *data = (php_stdio_stream_data*)stream->abstract;
+	int ret = 0;
+
+	assert(data != NULL);
+
+	if (data->file) {
+		ret = fflush(data->file);
+		if (ret != 0) {
+		    return fsync(fileno(data->file));
+		}
+	}
+	return ret;	
+}
+
 static int php_stdiop_flush(php_stream *stream)
 {
 	php_stdio_stream_data *data = (php_stdio_stream_data*)stream->abstract;
@@ -962,7 +979,8 @@ PHPAPI php_stream_ops	php_stream_stdio_ops = {
 	php_stdiop_seek,
 	php_stdiop_cast,
 	php_stdiop_stat,
-	php_stdiop_set_option
+	php_stdiop_set_option,
+	php_stdiop_sync,
 };
 /* }}} */
 
